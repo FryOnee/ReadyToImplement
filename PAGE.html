@@ -66,13 +66,26 @@
 </label>
 <p id="result">Color: </p>
 <ul id="wartosciZwracane"></ul>
+<ul>-Click 'n' to make new lasso</ul>
+<ul>-Click 'c' to clear last lasso</ul>
+<ul>-Click 'b' to change the color</ul>
 
 <script type="text/javascript" charset="utf-8">
 
 var color="(0,0,0,1)";
 
+var checkbox = document.getElementById("mySwitch");
+document.addEventListener("keydown", function(event) {
+            // Sprawdź, czy naciśnięty klawisz to "B"
+            if (event.key === "B" || event.key === "b") {
+              checkbox.checked = !checkbox.checked;
+              updateValue();
+            }});
+
 function updateValue() {
-    var checkbox = document.getElementById("mySwitch");
+  
+
+  var checkbox = document.getElementById("mySwitch");
     var resultElement = document.getElementById("result");
 
     
@@ -83,6 +96,9 @@ function updateValue() {
     resultElement.innerText = "COLOR: " + value;
     
 }
+
+
+
 
 	var canvas = document.getElementsByTagName('canvas')[0];
 	let floorImage = new Image();
@@ -364,16 +380,13 @@ canvas.addEventListener('mousemove', function (evt) {
 }, false);
  
 function showShapes() {
+  drawLassoHistory();
     context.globalAlpha = 0.5;
     context.fillStyle = color; 
     context.fill(lassoPath, 'evenodd');
     context.globalAlpha = 1;
     changePixelsToWhite(context, lassoPath);
-
-   
     
-
-    drawLassoHistory();
 }
 
 
@@ -411,7 +424,7 @@ function drawLinesBetweenPositions() {
     }
     
 }
-setInterval(drawLinesBetweenPositions, 70);
+setInterval(drawLinesBetweenPositions, 20);
 
 canvas.addEventListener('mousemove', function (evt) {
     lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
@@ -486,6 +499,38 @@ document.getElementById('newLassoButton').addEventListener('click', () => {
     lassoPath = new Path2D();
     lassoPoints = [];
 });
+// przyciski na klwiaturze zamiast buttonow na stronie
+
+document.addEventListener('keydown', (event) => {
+    // Sprawdź, czy wciśnięty klawisz to "n"
+    if (event.key === 'n') {
+        // Tutaj umieść kod, który ma zostać wykonany po wciśnięciu klawisza "n"
+        if (lassoPoints.length > 0) {
+            lassoHistory.push({ path: lassoPath, points: lassoPoints, color: color });
+        }
+
+        lassoPath = new Path2D();
+        lassoPoints = [];
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    // Sprawdź, czy wciśnięty klawisz to "n"
+    if (event.key === 'c') {
+      redraw();
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+            context.drawImage(walls, 0, 0, canvas.width, canvas.height);
+            
+            lassoPath = new Path2D();
+            lassoPoints = [];
+            
+            redraw();
+            drawLassoHistory();
+    }
+});
+//tutaj koncza sie klawisze zamiast przyciskow
+
 
 function drawLassoHistory() {
     for (const lasso of lassoHistory) {
