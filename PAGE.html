@@ -503,7 +503,7 @@ document.getElementById('newLassoButton').addEventListener('click', () => {
 
 document.addEventListener('keydown', (event) => {
     // Sprawdź, czy wciśnięty klawisz to "n"
-    if (event.key === 'n') {
+    if (event.key === 'n'||event.key === 'N') {
         // Tutaj umieść kod, który ma zostać wykonany po wciśnięciu klawisza "n"
         if (lassoPoints.length > 0) {
             lassoHistory.push({ path: lassoPath, points: lassoPoints, color: color });
@@ -516,7 +516,7 @@ document.addEventListener('keydown', (event) => {
 
 document.addEventListener('keydown', (event) => {
     // Sprawdź, czy wciśnięty klawisz to "n"
-    if (event.key === 'c') {
+    if (event.key === 'c'||event.key === 'C') {
       redraw();
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
@@ -570,7 +570,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
         const imgData = copyCanvas.toDataURL('image/jpeg');
         const a = document.createElement('a');
         a.href = imgData;
-        a.download = `Floors_Png/floor_${counter}.png`;
+        a.download = `Floors_Png/floor_${counter}.png`;//connect server and send it to server
         a.click();
     };
 });
