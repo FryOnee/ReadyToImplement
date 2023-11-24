@@ -305,8 +305,8 @@ trackTransforms(ctx);
         //NewFloorSrc(url, elementObrazu)
 
 
-NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-1.png`, floor);
-NewFloorSrc('https://i.ibb.co/GdMzsvq/wall-1.png', wall);
+NewFloorSrc(`https://i.ibb.co/2nYPxPM/floor-1.png`, floor);
+NewFloorSrc('https://i.ibb.co/MVyZ734/wall-1.png', wall);
 //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);
 //NewFloorSrc(`https://i.ibb.co/GdMzsvq/wall-${counter}.png`, wall);
 
@@ -569,7 +569,7 @@ function drawLassoHistory() {
 document.getElementById('saveButton').addEventListener('click', () => {
     const floor = new Image;
     //floor.src = `Floors_Png/floor_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
-    NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);
+    NewFloorSrc(`https://i.ibb.co/2nYPxPM/floor-1.png`, floor);
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
         copyCanvas.width = floor.width;
