@@ -64,6 +64,18 @@
   <input type="checkbox" id="mySwitch" class="switch-input" onchange="updateValue()">
   <span class="switch-slider"></span>
 </label>
+<form id="myForm">
+    <label for="punkt1">Wall 1</label>
+    <input type="checkbox" id="punkt1" name="punkt1" onchange="sprawdzZaznaczenie()">
+
+    <label for="punkt2">Wall 2</label>
+    <input type="checkbox" id="punkt2" name="punkt2" onchange="sprawdzZaznaczenie()">
+
+    <label for="punkt3">Wall 3</label>
+    <input type="checkbox" id="punkt3" name="punkt3" onchange="sprawdzZaznaczenie()">
+
+    
+  </form>
 <p id="result">Color: </p>
 <ul id="wartosciZwracane"></ul>
 <ul>-Click 'n' to make new lasso</ul>
@@ -71,6 +83,22 @@
 <ul>-Click 'b' to change the color</ul>
 
 <script type="text/javascript" charset="utf-8">
+
+var punkt1Zaznaczony=false;
+var punkt2Zaznaczony=false;
+var punkt3Zaznaczony=false;
+
+function sprawdzZaznaczenie() {
+      // Pobierz referencje do checkboxów
+      var checkbox1 = document.getElementById("punkt1");
+      var checkbox2 = document.getElementById("punkt2");
+      var checkbox3 = document.getElementById("punkt3");
+
+      // Sprawdź, czy są zaznaczone
+      punkt1Zaznaczony = checkbox1.checked;
+      punkt2Zaznaczony = checkbox2.checked;
+      punkt3Zaznaczony = checkbox3.checked;
+}
 
 var color="(0,0,0,1)";
 
@@ -97,7 +125,7 @@ function updateValue() {
     
 }
 
-function NewFloorSrc(url, elementObrazu) {
+function NewFloorSrcFromUrl(url, elementObrazu) {//connect server function with importing
   fetch(url, { mode: 'cors' })
     .then(response => {
       if (!response.ok) {
@@ -117,7 +145,10 @@ redraw()
 }
 
 var floor = new Image;
-	var wall = new Image;
+	
+var wallhigh = new Image;
+var wallmid = new Image;
+var walllow = new Image;
 
 	var canvas = document.getElementsByTagName('canvas')[0];
 	//let floorImage = new Image;
@@ -197,7 +228,12 @@ trackTransforms(ctx);
 			//ctx.stroke();
 			ctx.restore();
 			
-			ctx.drawImage(wall,0,0);
+            if(punkt1Zaznaczony){
+			    ctx.drawImage(wallhigh,0,0);}
+            if(punkt2Zaznaczony){
+                ctx.drawImage(wallmid,0,0);}
+            if(punkt3Zaznaczony){
+                ctx.drawImage(walllow,0,0);}
       
 		}
 		redraw();
@@ -294,21 +330,26 @@ trackTransforms(ctx);
         });
   });
 
-  //function NewFloorSrc() {
-  //  floor.src = `Floors_Png\\floor_${counter}.png`; //connect sever
-  //  wall.src = `Walls_Png\\wall_${counter}.png`;    //connect sever
-  //  scaleFactor = 1.05;
-  //  redraw()
-  //}
-  //NewFloorSrc();
+  function NewFloorSrc() {
+    //chosse which one
+    //floor.src = `floor_bw\\floor_${counter}.png`; //connect sever
+    //wallhigh.src = `helping_lines_bw_high\\floor_${counter}.png`;    //connect sever
+    //wallmid.src= `helping_lines_bw_mid\\floor_${counter}.png`;
+    //walllow.src= `helping_lines_bw_low\\floor_${counter}.png`;
+    
+    //taking png from url 
+    
+    NewFloorSrcFromUrl(`https://i.ibb.co/dfBgVnh/floor-0.png`, floor);//connect server
+    NewFloorSrcFromUrl('https://i.ibb.co/mb9Yrj8/floor-0.png', walllow);//connect server
+    NewFloorSrcFromUrl(`https://i.ibb.co/6RkDNCg/floor-0.png`, wallmid);
+    NewFloorSrcFromUrl(`https://i.ibb.co/WtJPw2j/floor-0.png`, wallhigh);
+ 
+    scaleFactor = 1.05;
+    redraw()
+  }
+  NewFloorSrc();
 
-        //NewFloorSrc(url, elementObrazu)
-
-
-NewFloorSrc(`https://i.ibb.co/2nYPxPM/floor-1.png`, floor);
-NewFloorSrc('https://i.ibb.co/MVyZ734/wall-1.png', wall);
-//NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);
-//NewFloorSrc(`https://i.ibb.co/GdMzsvq/wall-${counter}.png`, wall);
+        
 
 
 //kolejne
@@ -568,8 +609,8 @@ function drawLassoHistory() {
 
 document.getElementById('saveButton').addEventListener('click', () => {
     const floor = new Image;
-    //floor.src = `Floors_Png/floor_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
-    NewFloorSrc(`https://i.ibb.co/2nYPxPM/floor-1.png`, floor);
+    floor.src = `floor_bw/floor_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+    //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);//connect server
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
         copyCanvas.width = floor.width;
@@ -594,7 +635,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
         const imgData = copyCanvas.toDataURL('image/jpeg');
         const a = document.createElement('a');
         a.href = imgData;
-        a.download = `Floors_Png/floor_${counter}.png`;//connect server and send it to server
+        a.download = `floor_${counter}.png`;//connect server and send it to server
         a.click();
     };
 });
