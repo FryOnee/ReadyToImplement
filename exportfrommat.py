@@ -3,19 +3,19 @@ import numpy as np
 from PIL import Image
 
 def process_floor_data(floor_data):
-    """Funkcja przetwarzająca dane podłogi."""
-    # Konwertuj dane do numpy.ndarray, jeśli nie są już w tym formacie
+    
+    
     if not isinstance(floor_data, np.ndarray):
         floor_data = np.array(floor_data)
 
-    # Jeśli dane są jednowymiarowe, przekształć je na dwuwymiarowe
+    
     if floor_data.ndim == 1:
         floor_data = floor_data.reshape((1, -1))
 
-    # Rozmiary pliku
+    
     image_height, image_width = floor_data.shape
 
-    # creating clear png
+    
     image = Image.new('1', (image_width, image_height))
 
     # putting colors on that clear png
@@ -24,15 +24,13 @@ def process_floor_data(floor_data):
             pixel_color = 0 if value == 0 else 1
             image.putpixel((x, y), pixel_color)
 
-    # Tutaj możesz dodać dodatkowe operacje na obrazie lub zwrócić go, jeśli to konieczne
     return image
 
 def process_wall_data(floor_data):
-#"""Funkcja przetwarzająca dane podłogi."""
-# Konwertuj dane do numpy.ndarray, jeśli nie są już w tym formacie
+
     if not isinstance(floor_data, np.ndarray):
         floor_data = np.array(floor_data)
-    # Jeśli dane są jednowymiarowe, przekształć je na dwuwymiarowe
+    
     if floor_data.ndim == 1:
         floor_data = floor_data.reshape((1, -1))
     # Rozmiary pliku
@@ -44,10 +42,10 @@ def process_wall_data(floor_data):
         for x, value in enumerate(floor_row):
             pixel_color = (0, 0, 0, 0) if value == 0 else (255, 0, 0, 255)
             image.putpixel((x, y), pixel_color)
-    # Tutaj możesz dodać dodatkowe operacje na obrazie lub zwrócić go, jeśli to konieczne
+    
     return image
 
-names=['floor_bw','helping_lines_bw_high','helping_lines_bw_mid','helping_lines_bw_low']
+names=['optimized_bw','helping_lines_bw_high','helping_lines_bw_mid','helping_lines_bw_low']
 
 
 
@@ -67,8 +65,8 @@ with h5py.File(mat_file_path, 'r') as mat_file:
             counter=0
             counter2=0
             for idx, data_key in enumerate(current_group.keys()):
-                if idx > 0:  # Wyświetl dane tylko dla indeksów większych niż 0
-                    data = current_group[data_key][()]  # Wczytaj dane z grupy
+                if idx > 0:  
+                    data = current_group[data_key][()]  
                     #print(len(current_group))
                     #print(data_key)
                     if(counter2==number):

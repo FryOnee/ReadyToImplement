@@ -2,6 +2,8 @@
 <!DOCTYPE HTML>
 <html lang="en"><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <!-- It is main and ready page to implement -->
+  <!-- find 'NewFloorSrc()' to find solution to upload pngs -->
 	<style type="text/css" media="screen">
 		body { background:#9c9c9c; margin:1em; text-align:center; }
 		canvas { display:block; margin:1em auto; background:rgb(17, 17, 17); border:1px solid #ccc }
@@ -158,12 +160,14 @@ var walllow = new Image;
 floor.onload = function() {
     canvas.width = floor.width;
     canvas.height = floor.height;
+//canvas.width = 1500;
+//canvas.height = 1000;
     
     redraw();
 };
 
 var factor=1;
-let counter=1;
+let counter=0;
 const context = canvas.getContext('2d');
       let lassoPath = new Path2D();
       let lassoPoints = [];
@@ -331,18 +335,23 @@ trackTransforms(ctx);
   });
 
   function NewFloorSrc() {
-    //chosse which one
-    //floor.src = `floor_bw\\floor_${counter}.png`; //connect sever
-    //wallhigh.src = `helping_lines_bw_high\\floor_${counter}.png`;    //connect sever
-    //wallmid.src= `helping_lines_bw_mid\\floor_${counter}.png`;
-    //walllow.src= `helping_lines_bw_low\\floor_${counter}.png`;
+  //chosse which one
+  //floor.src = `floor_bw\\floor_${counter}.png`; //connect sever
+  //wallhigh.src = `helping_lines_bw_high\\floor_${counter}.png`;    //connect sever
+  //wallmid.src= `helping_lines_bw_mid\\floor_${counter}.png`;
+  //walllow.src= `helping_lines_bw_low\\floor_${counter}.png`;
     
+    floor.src = `optimized_bw_${counter}.png`; //connect sever
+    wallhigh.src = `truth_grid_high_${counter}.png`;    //connect sever
+    wallmid.src= `truth_grid_low_${counter}.png`;
+    walllow.src= `truth_grid_mid_${counter}.png`;
+
     //taking png from url 
     
-    NewFloorSrcFromUrl(`https://i.ibb.co/dfBgVnh/floor-0.png`, floor);//connect server
-    NewFloorSrcFromUrl('https://i.ibb.co/mb9Yrj8/floor-0.png', walllow);//connect server
-    NewFloorSrcFromUrl(`https://i.ibb.co/6RkDNCg/floor-0.png`, wallmid);
-    NewFloorSrcFromUrl(`https://i.ibb.co/WtJPw2j/floor-0.png`, wallhigh);
+    //NewFloorSrcFromUrl(`https://i.ibb.co/dfBgVnh/floor-0.png`, floor);//connect server
+    //NewFloorSrcFromUrl('https://i.ibb.co/mb9Yrj8/floor-0.png', walllow);//connect server
+    //NewFloorSrcFromUrl(`https://i.ibb.co/6RkDNCg/floor-0.png`, wallmid);
+    //NewFloorSrcFromUrl(`https://i.ibb.co/WtJPw2j/floor-0.png`, wallhigh);
  
     scaleFactor = 1.05;
     redraw()
