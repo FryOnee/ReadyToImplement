@@ -318,7 +318,7 @@ trackTransforms(ctx);
     });
 
     BACK.addEventListener("click", function () {
-      if(counter!=1){
+      if(counter!=0){
         counter--;
       }
       lassoHistory = [];
@@ -342,7 +342,7 @@ trackTransforms(ctx);
   //walllow.src= `helping_lines_bw_low\\floor_${counter}.png`;
     
     floor.src = `optimized_bw_${counter}.png`; //connect sever
-    wallhigh.src = `truth_grid_high_${counter}.png`;    //connect sever
+    wallhigh.src = `truth_grid_${counter}.png`;    //connect sever
     wallmid.src= `truth_grid_low_${counter}.png`;
     walllow.src= `truth_grid_mid_${counter}.png`;
 
@@ -618,7 +618,7 @@ function drawLassoHistory() {
 
 document.getElementById('saveButton').addEventListener('click', () => {
     const floor = new Image;
-    floor.src = `floor_bw/floor_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+    floor.src = floor.src = `optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
     //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);//connect server
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
@@ -644,7 +644,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
         const imgData = copyCanvas.toDataURL('image/jpeg');
         const a = document.createElement('a');
         a.href = imgData;
-        a.download = `floor_${counter}.png`;//connect server and send it to server
+        a.download = `floor_${counter}(result).png`;//connect server and send it to server
         a.click();
     };
 });
