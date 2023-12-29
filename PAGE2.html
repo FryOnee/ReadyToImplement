@@ -158,6 +158,7 @@ var walllow = new Image;
 //NewFloorSrc('https://i.ibb.co/QkQd4nW/floor-1.png', floor);
 
 floor.onload = function() {
+<<<<<<< HEAD
     //canvas.width = floor.width;
     //canvas.height = floor.height;
     //canvas.width = 1500;
@@ -166,6 +167,12 @@ floor.onload = function() {
     
     canvas.width = window.innerWidth*0.8;
     canvas.height = (window.innerWidth*0.8)*(9/16);
+=======
+    canvas.width = floor.width;
+    canvas.height = floor.height;
+//canvas.width = 1500;
+//canvas.height = 1000;
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
     
     redraw();
 };
@@ -184,20 +191,30 @@ const context = canvas.getContext('2d');
 var ctx = canvas.getContext('2d');
 trackTransforms(ctx);
 
+<<<<<<< HEAD
 //ctx.setTransform(window.innerWidth*0.8/floor.width, 0, 0, window.innerWidth*0.8/floor.width, 0, 0);
 
+=======
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
 	
 		
 		
 		function redraw(){
+<<<<<<< HEAD
       
+=======
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
 			// Clear the entire canvas
       
 			var p1 = ctx.transformedPoint(0,0);
 			var p2 = ctx.transformedPoint(canvas.width,canvas.height);
+<<<<<<< HEAD
       //var p2 = ctx.transformedPoint(window.innerWidth*0.8,(window.innerWidth*0.8)*(9/16));
 			ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
       
+=======
+			ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
 
 			// Alternatively:
 			// ctx.save();
@@ -242,7 +259,11 @@ trackTransforms(ctx);
 			ctx.restore();
 			
             if(punkt1Zaznaczony){
+<<<<<<< HEAD
 			        ctx.drawImage(wallhigh,0,0);}
+=======
+			    ctx.drawImage(wallhigh,0,0);}
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
             if(punkt2Zaznaczony){
                 ctx.drawImage(wallmid,0,0);}
             if(punkt3Zaznaczony){
@@ -314,12 +335,17 @@ trackTransforms(ctx);
     
 	
 
+<<<<<<< HEAD
     document.addEventListener("DOMContentLoaded", function () {
+=======
+  document.addEventListener("DOMContentLoaded", function () {
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
     const NEXT = document.getElementById("NEXT");
     const BACK = document.getElementById("BACK");
     const RESET = document.getElementById("RESET");
 
     NEXT.addEventListener("click", function () {
+<<<<<<< HEAD
         counter++;
         lassoHistory = [];
         NewFloorSrc();
@@ -365,6 +391,54 @@ function NewFloorSrc() {
 }
 
 NewFloorSrc();
+=======
+      counter++;
+      lassoHistory = [];
+      NewFloorSrc();
+      
+    });
+
+    BACK.addEventListener("click", function () {
+      if(counter!=0){
+        counter--;
+      }
+      lassoHistory = [];
+      NewFloorSrc();
+      
+    });
+    RESET.addEventListener("click", function () {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      factor=1.05;
+        redraw();
+        showShapes()
+			
+        });
+  });
+
+  function NewFloorSrc() {
+  //chosse which one
+  //floor.src = `floor_bw\\floor_${counter}.png`; //connect sever
+  //wallhigh.src = `helping_lines_bw_high\\floor_${counter}.png`;    //connect sever
+  //wallmid.src= `helping_lines_bw_mid\\floor_${counter}.png`;
+  //walllow.src= `helping_lines_bw_low\\floor_${counter}.png`;
+    
+    floor.src = `optimized_bw_${counter}.png`; //connect sever
+    wallhigh.src = `truth_grid_${counter}.png`;    //connect sever
+    wallmid.src= `truth_grid_low_${counter}.png`;
+    walllow.src= `truth_grid_mid_${counter}.png`;
+
+    //taking png from url 
+    
+    //NewFloorSrcFromUrl(`https://i.ibb.co/dfBgVnh/floor-0.png`, floor);//connect server
+    //NewFloorSrcFromUrl('https://i.ibb.co/mb9Yrj8/floor-0.png', walllow);//connect server
+    //NewFloorSrcFromUrl(`https://i.ibb.co/6RkDNCg/floor-0.png`, wallmid);
+    //NewFloorSrcFromUrl(`https://i.ibb.co/WtJPw2j/floor-0.png`, wallhigh);
+ 
+    scaleFactor = 1.05;
+    redraw()
+  }
+  NewFloorSrc();
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
 
         
 
@@ -626,7 +700,11 @@ function drawLassoHistory() {
 
 document.getElementById('saveButton').addEventListener('click', () => {
     const floor = new Image;
+<<<<<<< HEAD
     floor.src = `optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+=======
+    floor.src = floor.src = `optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+>>>>>>> b2a9497cb039ce06a7810d5e77c2421302cb6619
     //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);//connect server
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
