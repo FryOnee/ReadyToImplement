@@ -323,6 +323,7 @@ trackTransforms(ctx);
         counter++;
         lassoHistory = [];
         NewFloorSrc();
+        redraw();
         setTimeout(function() {
           Reset();
 }, 120);
@@ -333,6 +334,7 @@ trackTransforms(ctx);
         if (counter != 0) {
             counter--;
         }
+        redraw();
         lassoHistory = [];
         NewFloorSrc();
         setTimeout(function() {
