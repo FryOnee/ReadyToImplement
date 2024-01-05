@@ -270,27 +270,45 @@ trackTransforms(ctx);
 		
 		var lastX=canvas.width/2, lastY=canvas.height/2;
 		var dragStart,dragged;
-		canvas.addEventListener('mousedownp',function(evt){
-			document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
-			lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
-			lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
-			dragStart = ctx.transformedPoint(lastX,lastY);
-			dragged = false;
-		},false);
-		canvas.addEventListener('mousemove',function(evt){
-			lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
-			lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
-			dragged = true;
-			if (dragStart){
-				var pt = ctx.transformedPoint(lastX,lastY);
-				ctx.translate(pt.x-dragStart.x,pt.y-dragStart.y);
-				redraw();
-			}
-		},false);
-		canvas.addEventListener('mouseup',function(evt){
-			dragStart = null;
-			if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
-		},false);
+		canvas.addEventListener('mousedown', function(evt){
+    // Sprawdź, czy prawy przycisk myszy został naciśnięty
+    if (evt.button === 2) {
+        document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+        lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+        lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+        dragStart = ctx.transformedPoint(lastX, lastY);
+        dragged = false;
+    }
+}, false);
+
+canvas.addEventListener('mousemove', function(evt){
+    // Sprawdź, czy prawy przycisk myszy jest wciśnięty
+    if (evt.buttons === 2) {
+        lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+        lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+        dragged = true;
+        if (dragStart){
+            var pt = ctx.transformedPoint(lastX, lastY);
+            ctx.translate(pt.x - dragStart.x, pt.y - dragStart.y);
+            redraw();
+        }
+    }
+}, false);
+
+canvas.addEventListener('contextmenu', function(evt){
+    // Uniknij domyślnego kontekstu menu na prawym przycisku myszy
+    evt.preventDefault();
+}, false);
+
+canvas.addEventListener('mouseup', function(evt){
+    // Sprawdź, czy prawy przycisk myszy został zwolniony
+    
+        dragStart = null;
+        if (!dragged) {
+            zoom(evt.shiftKey ? -1 : 1);
+        }
+    
+}, false);
 
 		var scaleFactor = 10.5;
 		var zoom = function(clicks){
@@ -348,7 +366,7 @@ trackTransforms(ctx);
 });
 
 function Reset() {
-    // Ustaw nowe wartości w macierzy transformacji
+    
     ctx.setTransform(window.innerWidth * 0.8 / floor.width, 0, 0, window.innerWidth * 0.8 / floor.width, 0, 0);
     factor = 1.05;
     redraw();
@@ -356,14 +374,14 @@ function Reset() {
 }
 
 function NewFloorSrc() {
-    // Wybierz odpowiednie źródło dla obrazów
-    floor.src = `optimized_bw_${counter}.png`; // Połącz się z serwerem
+    // img source 
+    //floor.src = `optimized_bw_${counter}.png`; // Połącz się z serwerem
     wallhigh.src = `truth_grid_${counter}.png`; // Połącz się z serwerem
     wallmid.src = `truth_grid_low_${counter}.png`;
     walllow.src = `truth_grid_mid_${counter}.png`;
 
 
-    //NewFloorSrcFromUrl('link',floor);
+    NewFloorSrcFromUrl('https://i.ibb.co/HXQjt5X/optimized-bw-0.png',floor);
     //NewFloorSrcFromUrl('link',wallhigh);
     //NewFloorSrcFromUrl('link',wallmid);
     //NewFloorSrcFromUrl('link',walllow);
@@ -379,10 +397,6 @@ setTimeout(function() {
 }, 300);
 
         
-
-
-//kolejne
-	
 	
 	function trackTransforms(ctx){
 		var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
@@ -637,9 +651,10 @@ function drawLassoHistory() {
 }
 
 document.getElementById('saveButton').addEventListener('click', () => {
-    const floor = new Image;
-    floor.src = `optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
-    //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);//connect server
+    //const floor = new Image;
+    //floor.src = `optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+    //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);//connect server'
+    NewFloorSrcFromUrl('https://i.ibb.co/HXQjt5X/optimized-bw-0.png',floor);
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
         copyCanvas.width = floor.width;
