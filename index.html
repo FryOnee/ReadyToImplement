@@ -375,16 +375,17 @@ function Reset() {
 
 function NewFloorSrc() {
     // img source 
-    //floor.src = `optimized_bw_${counter}.png`; // Połącz się z serwerem
-    wallhigh.src = `truth_grid_${counter}.png`; // Połącz się z serwerem
-    wallmid.src = `truth_grid_low_${counter}.png`;
-    walllow.src = `truth_grid_mid_${counter}.png`;
+    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/optimized_bw_${counter}.png` // Połącz się z serwerem
+    wallhigh.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_high_${counter}.png` // Połącz się z serwerem
+    wallmid.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_mid_${counter}.png`;
+    walllow.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_low_${counter}.png`;
 
-
-    NewFloorSrcFromUrl('https://i.ibb.co/HXQjt5X/optimized-bw-0.png',floor);
-    //NewFloorSrcFromUrl('link',wallhigh);
-    //NewFloorSrcFromUrl('link',wallmid);
-    //NewFloorSrcFromUrl('link',walllow);
+    //https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/optimized_bw_0.png
+    //NewFloorSrcFromUrl(`https://i.ibb.co/HXQjt5X/optimized-bw-0.png`,floor);
+    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/optimized_bw_0.png`,floor);
+    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_high_0.png`,wallhigh);
+    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_mid_0.png`,wallmid);
+    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_low_0.png`,walllow);
 
 
     scaleFactor = 1.05;
