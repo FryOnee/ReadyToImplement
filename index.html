@@ -664,7 +664,7 @@ function drawLassoHistory() {
 document.getElementById('saveButton').addEventListener('click', () => {
     const floor = new Image;
     floor.crossOrigin = "anonymous";
-    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/optimized_bw_${counter}.png`+"?not-from-cache-please"; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
     
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
