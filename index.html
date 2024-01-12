@@ -67,13 +67,13 @@
   <span class="switch-slider"></span>
 </label>
 <form id="myForm">
-    <label for="punkt1">Wall 1</label>
+    <label for="punkt1">Wall 1(L)</label>
     <input type="checkbox" id="punkt1" name="punkt1" onchange="sprawdzZaznaczenie()">
 
-    <label for="punkt2">Wall 2</label>
+    <label for="punkt2">Wall 2(M)</label>
     <input type="checkbox" id="punkt2" name="punkt2" onchange="sprawdzZaznaczenie()">
 
-    <label for="punkt3">Wall 3</label>
+    <label for="punkt3">Wall 3(H)</label>
     <input type="checkbox" id="punkt3" name="punkt3" onchange="sprawdzZaznaczenie()">
 
     
@@ -157,7 +157,8 @@ var walllow = new Image;
 //floor.src = 'Floors_Png/floor_1.png';   //connect sever
 //NewFloorSrc('https://i.ibb.co/QkQd4nW/floor-1.png', floor);
 
-floor.onload = function() {
+//floor.onload = 
+function setSizeOfCanvas() {
     //canvas.width = floor.width;
     //canvas.height = floor.height;
     //canvas.width = 1500;
@@ -374,28 +375,37 @@ function Reset() {
 }
 
 function NewFloorSrc() {
-    // img source 
-    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/optimized_bw_${counter}.png` // Połącz się z serwerem
-    wallhigh.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_high_${counter}.png` // Połącz się z serwerem
-    wallmid.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_mid_${counter}.png`;
-    walllow.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_low_${counter}.png`;
+    let imagesLoaded = 0;
+    const totalImages = 4; // Ilość obrazów do załadowania
 
-    //https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/optimized_bw_0.png
-    //NewFloorSrcFromUrl(`https://i.ibb.co/HXQjt5X/optimized-bw-0.png`,floor);
-    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/optimized_bw_0.png`,floor);
-    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_high_0.png`,wallhigh);
-    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_mid_0.png`,wallmid);
-    //NewFloorSrcFromUrl(`https://scan2bim-results.s3.eu-central-1.amazonaws.com/12_04_2023-17.45.07_BRBG+ADH+Final+PC/BRBG_pngs/truth_grid_low_0.png`,walllow);
+    // Funkcja do sprawdzenia czy wszystkie obrazy zostały załadowane
+    function checkAllImagesLoaded() {
+        imagesLoaded++;
+        if (imagesLoaded === totalImages) {
+          setSizeOfCanvas();
+            redraw(); // Wywołanie funkcji redraw po załadowaniu wszystkich obrazów
+            Reset();   // Następnie wywołanie funkcji Reset
+        }
+    }
 
+    // Ustawianie źródeł dla obrazów i nasłuchiwanie zdarzenia 'load'
+    //floor.crossOrigin = "anonymous";
+    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/optimized_bw_${counter}.png`;
+    floor.onload = checkAllImagesLoaded;
+
+    wallhigh.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/truth_grid_high_${counter}.png`;
+    wallhigh.onload = checkAllImagesLoaded;
+
+    wallmid.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/truth_grid_mid_${counter}.png`;
+    wallmid.onload = checkAllImagesLoaded;
+
+    walllow.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/truth_grid_low_${counter}.png`;
+    walllow.onload = checkAllImagesLoaded;
 
     scaleFactor = 1.05;
-    redraw();
 }
+NewFloorSrc()
 
-NewFloorSrc();
-setTimeout(function() {
-          Reset();
-}, 300);
 
         
 	
@@ -652,10 +662,10 @@ function drawLassoHistory() {
 }
 
 document.getElementById('saveButton').addEventListener('click', () => {
-    //const floor = new Image;
-    //floor.src = `optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
-    //NewFloorSrc(`https://i.ibb.co/QkQd4nW/floor-${counter}.png`, floor);//connect server'
-    NewFloorSrcFromUrl('https://i.ibb.co/HXQjt5X/optimized-bw-0.png',floor);
+    const floor = new Image;
+    floor.crossOrigin = "anonymous";
+    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/optimized_bw_${counter}.png`; //connect sever and save it on server(the best will be new place to be able to dawland pngs again)
+    
     floor.onload = function () {
         const copyCanvas = document.createElement('canvas');
         copyCanvas.width = floor.width;
