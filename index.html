@@ -339,13 +339,24 @@ canvas.addEventListener('mouseup', function(evt){
     const RESET = document.getElementById("RESET");
 
     NEXT.addEventListener("click", function () {
+    var check = new Image();
+    check.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/optimized_bw_${counter + 1}.png`;
+
+    check.onload = function() {
         counter++;
         lassoHistory = [];
         NewFloorSrc();
         redraw();
+
+        // Ustawia opóźnienie przed resetowaniem
         setTimeout(function() {
-          Reset();
-}, 200);
+            Reset();
+        }, 200);
+    };
+
+    
+});
+
         //Reset();
     });
 
@@ -364,7 +375,7 @@ canvas.addEventListener('mouseup', function(evt){
     RESET.addEventListener("click", function () {
         Reset();
     });
-});
+
 
 function Reset() {
     
