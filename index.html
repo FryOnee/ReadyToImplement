@@ -388,16 +388,16 @@ function Reset() {
 
 function NewFloorSrc() {
     let imagesLoaded = 0;
-    const totalImages = 4; // Ilość obrazów do załadowania
+    const totalImages = 10; // Ilość obrazów do załadowania
 
     // Funkcja do sprawdzenia czy wszystkie obrazy zostały załadowane
     function checkAllImagesLoaded() {
         imagesLoaded++;
-        if (imagesLoaded === totalImages) {
+        //if (imagesLoaded === totalImages) {
           setSizeOfCanvas();
             redraw(); // Wywołanie funkcji redraw po załadowaniu wszystkich obrazów
             Reset();   // Następnie wywołanie funkcji Reset
-        }
+        //}
     }
 
     // Ustawianie źródeł dla obrazów i nasłuchiwanie zdarzenia 'load'
