@@ -402,16 +402,16 @@ function NewFloorSrc() {
 
     // Ustawianie źródeł dla obrazów i nasłuchiwanie zdarzenia 'load'
     //floor.crossOrigin = "anonymous";
-    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/optimized_bw_${counter}.png`;
+    floor.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Old projects/Pilot2/png_images/optimized_bw_${counter}.png`;
     floor.onload = checkAllImagesLoaded;
 
-    wallhigh.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/truth_grid_high_${counter}.png`;
+    wallhigh.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Old projects/Pilot2/png_images/truth_grid_high_${counter}.png`;
     wallhigh.onload = checkAllImagesLoaded;
 
-    wallmid.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/truth_grid_mid_${counter}.png`;
+    wallmid.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Old projects/Pilot2/png_images/truth_grid_mid_${counter}.png`;
     wallmid.onload = checkAllImagesLoaded;
 
-    walllow.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Pilot2/png_images/truth_grid_low_${counter}.png`;
+    walllow.src = `https://scan2bim-results.s3.eu-central-1.amazonaws.com/Old projects/Pilot2/png_images/truth_grid_low_${counter}.png`;
     walllow.onload = checkAllImagesLoaded;
 
     scaleFactor = 1.05;
@@ -699,7 +699,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
             changePixelsToWhite(copyContext, lasso.path, lasso.color);
         }
 
-        const imgData = copyCanvas.toDataURL('image/jpeg');
+        const imgData = copyCanvas.toDataURL('image/jpng');
         const a = document.createElement('a');
         a.href = imgData;
         a.download = `floor_${counter}(result).png`;//connect server and send it to server
